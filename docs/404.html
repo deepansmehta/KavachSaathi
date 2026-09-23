@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Emergency Medical Info · KavachSaathi</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    :root {
+      --navy: #09142A;
+      --navy-light: #122040;
+      --orange: #FF5722;
+      --teal: #22D3EE;
+      --gold: #C9A227;
+      --danger: #FF1744;
+      --white: #fff;
+      --gray: #868E96;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(180deg, var(--navy) 0%, #0D1B35 100%);
+      color: var(--white);
+      min-height: 100vh;
+      padding: 0 0 48px;
+    }
+    .banner {
+      background: var(--danger);
+      text-align: center;
+      padding: 12px 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      font-size: 13px;
+    }
+    .banner small { display: block; font-weight: 400; opacity: 0.85; margin-top: 4px; }
+    .wrap { max-width: 480px; margin: 0 auto; padding: 24px 20px; }
+    .profile { display: flex; gap: 16px; align-items: center; margin-bottom: 24px; }
+    .avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--navy-light); border: 2px solid var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; font-weight: 700;
+    }
+    h1 { font-size: 24px; font-weight: 700; }
+    .meta { color: var(--gray); font-size: 14px; margin-top: 4px; }
+    .blood {
+      background: var(--orange); border-radius: 16px; padding: 20px;
+      text-align: center; margin: 16px 0 24px;
+    }
+    .blood label { font-size: 12px; opacity: 0.9; letter-spacing: 1px; }
+    .blood strong { display: block; font-size: 42px; margin-top: 4px; }
+    .section {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 16px; margin-bottom: 12px;
+    }
+    .section h2 { font-size: 13px; color: var(--gold); margin-bottom: 8px; letter-spacing: 0.5px; }
+    .section p, .section li { font-size: 15px; line-height: 1.5; }
+    .section ul { list-style: none; }
+    .section li + li { margin-top: 6px; }
+    .call {
+      display: block; text-decoration: none; color: var(--white);
+      background: var(--teal); color: var(--navy); font-weight: 700;
+      padding: 12px 16px; border-radius: 12px; margin-top: 8px; text-align: center;
+    }
+    .footer {
+      text-align: center; margin-top: 32px; color: var(--gray); font-size: 12px;
+    }
+    .footer .brand { color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+    .footer .dedication { color: #9aa4b2; font-size: 12px; margin-bottom: 6px; }
+    .doctor {
+      margin-top: 16px; width: 100%; padding: 14px;
+      background: transparent; border: 1.5px solid var(--orange);
+      color: var(--orange); border-radius: 12px; font-weight: 600; font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    🚨 EMERGENCY MEDICAL INFORMATION
+    <small>Read only · Scan time logged</small>
+  </div>
+
+  <div class="wrap" id="app">
+    <div class="profile">
+      <div class="avatar" id="initials">DM</div>
+      <div>
+        <h1 id="name">Deepansh Mehta</h1>
+        <div class="meta" id="age">Age · Demo profile</div>
+      </div>
+    </div>
+
+    <div class="blood">
+      <label>BLOOD GROUP</label>
+      <strong id="blood">B+</strong>
+    </div>
+
+    <div class="section">
+      <h2>⚠️ ALLERGIES</h2>
+      <p id="allergies">Penicillin · Dust · Shellfish</p>
+    </div>
+
+    <div class="section">
+      <h2>💊 CURRENT MEDICINES</h2>
+      <ul id="meds">
+        <li>Metformin 500mg</li>
+        <li>Aspirin 75mg</li>
+        <li>Vitamin B12</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🏥 CHRONIC CONDITIONS</h2>
+      <p id="conditions">Type 2 Diabetes · Hypertension</p>
+    </div>
+
+    <div class="section">
+      <h2>📞 EMERGENCY CONTACTS</h2>
+      <a class="call" href="tel:+919876543210">CALL · Rakesh Mehta — Father</a>
+      <a class="call" href="tel:+919876543211" style="background:#FF7043;color:#fff">CALL · Sunita Mehta — Mother</a>
+    </div>
+
+    <div class="section">
+      <h2>IDS</h2>
+      <p>Insurance: INS-884422</p>
+      <p>ABHA: 12-3456-7890-1234</p>
+      <p>Organ Donor: ✅ Yes</p>
+    </div>
+
+    <button class="doctor" type="button">🏥 Doctor Edit Access — Request OTP</button>
+
+    <div class="footer">
+      <div class="brand">KavachSaathi · GDM Technoworld</div>
+      <div class="dedication">In memory of Late Shri Ganga Dhar Mehta · 1949–2012</div>
+      <div>This scan has been logged</div>
+      <div id="token"></div>
+    </div>
+  </div>
+
+  <script>
+    // Token from path: /e/{qrToken}
+    const parts = location.pathname.split('/').filter(Boolean);
+    const token = parts[parts.length - 1] || 'demo';
+    document.getElementById('token').textContent = 'Token: ' + token;
+
+    // In production, fetch patient profile from Cloud Function:
+    // fetch(`https://us-central1-PROJECT.cloudfunctions.net/emergencyPage?token=${token}`)
+    //   .then(r => r.json()).then(renderProfile)
+  </script>
+</body>
+</html>

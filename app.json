@@ -5,21 +5,71 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "scheme": "kavachsaathi",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#09142A"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gdmtechnoworld.kavachsaathi",
+      "usesAppleSignIn": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Prescription scan ke liye camera chahiye.",
+        "NSPhotoLibraryUsageDescription": "Prescription photo choose karne ke liye.",
+        "NSLocationWhenInUseUsageDescription": "SOS ke time location share karne ke liye.",
+        "NSMotionUsageDescription": "Shake se SOS activate karne ke liye.",
+        "UIBackgroundModes": [
+          "remote-notification"
+        ]
+      }
     },
     "android": {
+      "package": "com.gdmtechnoworld.kavachsaathi",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#09142A",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "ACCESS_FINE_LOCATION",
+        "VIBRATE",
+        "RECEIVE_BOOT_COMPLETED"
+      ],
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-font",
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Prescription scan ke liye camera chahiye."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Prescription photo choose karne ke liye."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "SOS ke time location share karne ke liye."
+        }
+      ],
+      "expo-notifications",
+      "expo-web-browser",
+      "expo-apple-authentication"
+    ]
   }
 }

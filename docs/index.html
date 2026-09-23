@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KavachSaathi — Ek Card. Poori Suraksha.</title>
+  <meta name="description" content="KavachSaathi smart health card — emergency medical info, family cards, medicine reminders. By GDM Technoworld, Fatehabad." />
+  <meta name="theme-color" content="#09142A" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #09142A;
+      --navy-2: #0C1A30;
+      --surface: #122040;
+      --orange: #FF5722;
+      --teal: #22D3EE;
+      --gold: #C9A227;
+      --white: #FFFFFF;
+      --muted: #9AA4B2;
+      --line: rgba(255,255,255,0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(9, 20, 42, 0.85);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-family: Rajdhani, sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.3px; }
+    .mark {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--teal); color: var(--navy);
+      display: grid; place-items: center; font-family: Rajdhani, sans-serif; font-size: 20px; font-weight: 700;
+    }
+    .nav-links { display: flex; gap: 22px; align-items: center; font-size: 14px; color: var(--muted); }
+    .nav-links a:hover { color: var(--white); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 12px 20px; border-radius: 12px; font-weight: 600; font-size: 14px;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: linear-gradient(135deg, var(--orange), #E64A19); color: var(--white); }
+    .btn-ghost { border: 1px solid var(--line); color: var(--white); background: transparent; }
+
+    /* Hero */
+    .hero {
+      padding: 72px 0 64px;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(34,211,238,0.12), transparent 60%),
+        linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center;
+    }
+    .eyebrow {
+      color: var(--gold); font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: Rajdhani, sans-serif; font-weight: 700;
+      font-size: clamp(40px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+    .hero p { color: var(--muted); font-size: 17px; max-width: 46ch; margin-bottom: 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .card-preview {
+      background: linear-gradient(145deg, #1A2A4A, #0E1C34);
+      border: 1px solid var(--line); border-radius: 20px; padding: 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+    }
+    .card-preview .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+    .card-preview .chip {
+      font-size: 11px; letter-spacing: 1px; color: var(--gold);
+      border: 1px solid rgba(201,162,39,0.4); padding: 4px 10px; border-radius: 999px;
+    }
+    .card-preview .name { font-family: Rajdhani, sans-serif; font-size: 28px; font-weight: 700; }
+    .card-preview .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .card-preview .row { display: flex; gap: 16px; margin-top: 24px; }
+    .stat {
+      flex: 1; background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+      border-radius: 12px; padding: 12px;
+    }
+    .stat label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .stat strong { font-size: 18px; color: var(--teal); }
+
+    /* Sections */
+    section { padding: 64px 0; }
+    .section-title {
+      font-family: Rajdhani, sans-serif; font-size: 34px; font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .section-sub { color: var(--muted); margin-bottom: 32px; max-width: 52ch; }
+    .features {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .feature {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 16px; padding: 22px;
+    }
+    .feature h3 {
+      font-family: Rajdhani, sans-serif; font-size: 20px; font-weight: 700;
+      margin: 10px 0 8px;
+    }
+    .feature p { color: var(--muted); font-size: 14px; }
+    .icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: grid; place-items: center; background: rgba(34,211,238,0.12); color: var(--teal);
+      font-size: 18px;
+    }
+
+    .tribute {
+      background: linear-gradient(180deg, rgba(201,162,39,0.08), transparent);
+      border-top: 1px solid rgba(201,162,39,0.25);
+      border-bottom: 1px solid rgba(201,162,39,0.15);
+      text-align: center; padding: 48px 0;
+    }
+    .tribute .label { color: var(--gold); letter-spacing: 2px; font-size: 11px; font-weight: 600; }
+    .tribute h2 {
+      font-family: Rajdhani, sans-serif; font-size: 28px; margin: 10px 0 8px;
+    }
+    .tribute .years { color: var(--gold); font-weight: 600; margin-bottom: 10px; }
+    .tribute p { color: var(--muted); max-width: 52ch; margin: 0 auto; font-size: 14px; }
+
+    .cta {
+      text-align: center; padding: 72px 0;
+      background: radial-gradient(ellipse at center, rgba(255,87,34,0.12), transparent 55%);
+    }
+    .cta h2 { font-family: Rajdhani, sans-serif; font-size: 36px; margin-bottom: 10px; }
+    .cta p { color: var(--muted); margin-bottom: 24px; }
+
+    footer {
+      border-top: 1px solid var(--line); padding: 28px 0 40px;
+      color: var(--muted); font-size: 13px;
+    }
+    .footer-inner {
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center;
+    }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a:hover { color: var(--white); }
+
+    @media (max-width: 860px) {
+      .hero-grid, .features { grid-template-columns: 1fr; }
+      .nav-links a:not(.btn) { display: none; }
+      .hero { padding-top: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/">
+        <span class="mark">K</span>
+        KavachSaathi
+      </a>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="/e/">Emergency Demo</a>
+        <a class="btn btn-primary" href="#get-card">Get Card</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">GDM Technoworld · Fatehabad</p>
+          <h1>Ek Card.<br />Poori Suraksha.</h1>
+          <p>
+            Physical + digital health card for your family. Emergency pe blood group,
+            medicines, aur contacts — ek scan mein.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#get-card">Get Your Card</a>
+            <a class="btn btn-ghost" href="/e/">View Emergency Demo</a>
+          </div>
+        </div>
+        <aside class="card-preview" aria-label="Sample health card">
+          <div class="top">
+            <span class="brand" style="font-size:16px"><span class="mark" style="width:28px;height:28px;font-size:14px;border-radius:8px">K</span> KavachSaathi</span>
+            <span class="chip">PRO</span>
+          </div>
+          <div class="name">Deepansh Mehta</div>
+          <div class="meta">Health ID · KVS-2026-DEMO</div>
+          <div class="row">
+            <div class="stat"><label>Blood</label><strong>B+</strong></div>
+            <div class="stat"><label>Contacts</label><strong>2</strong></div>
+            <div class="stat"><label>Meds</label><strong>3</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <h2 class="section-title">Jo zaruri hai, woh ready</h2>
+        <p class="section-sub">Emergency se daily reminders tak — ek system mein.</p>
+        <div class="features">
+          <article class="feature">
+            <div class="icon">▣</div>
+            <h3>Emergency QR</h3>
+            <p>Scanner pe dikhao — login nahi chahiye. Blood group, allergies, contacts turant.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">◎</div>
+            <h3>Family Cards</h3>
+            <p>Papa, Maa, bacche — har member ka alag card, ek account se manage.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">◉</div>
+            <h3>Medicine Reminders</h3>
+            <p>Prescription scan, reminders, aur chemist ko WhatsApp share.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="tribute" id="about">
+      <div class="wrap">
+        <p class="label">DEDICATED TO</p>
+        <h2>Late Shri Ganga Dhar Mehta</h2>
+        <p class="years">1949 — 2012</p>
+        <p>
+          GDM Technoworld unke naam aur sanskaar se prernit hai. KavachSaathi
+          har parivaar ki sehat aur suraksha ke liye — unki yaad mein.
+        </p>
+      </div>
+    </section>
+
+    <section class="cta" id="get-card">
+      <div class="wrap">
+        <h2>Apna KavachSaathi card lo</h2>
+        <p>App download / order flow jald live. Abhi emergency demo dekh sakte ho.</p>
+        <a class="btn btn-primary" href="/e/">Open Emergency Demo</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div>
+        <div>© GDM Technoworld Pvt. Ltd. · Fatehabad, Haryana</div>
+        <div style="margin-top:4px;font-size:12px">In memory of Late Shri Ganga Dhar Mehta · 1949–2012</div>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:support@gdmtechnoworld.com">Support</a>
+        <a href="/e/">Emergency</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
